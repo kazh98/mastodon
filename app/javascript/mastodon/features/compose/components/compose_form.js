@@ -19,6 +19,7 @@ import { length } from 'stringz';
 import { countableText } from '../util/counter';
 
 const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000\u2028\u2029\u0009\u000a\u000b\u000c\u000d';
+const butimiliSuffix = 'うおおおおおおおおおおおおあああああああああああああああああああああああああああああああ！！！！！！！！！！！ (ﾌﾞﾘﾌﾞﾘﾌﾞﾘﾌﾞﾘｭﾘｭﾘｭﾘｭﾘｭﾘｭ！！！！！！ﾌﾞﾂﾁﾁﾌﾞﾌﾞﾌﾞﾁﾁﾁﾁﾌﾞﾘﾘｲﾘﾌﾞﾌﾞﾌﾞﾌﾞｩｩｩｩｯｯｯ！！！！！！！)';
 
 const messages = defineMessages({
   placeholder: { id: 'compose_form.placeholder', defaultMessage: 'What is on your mind?' },
@@ -67,6 +68,13 @@ export default class ComposeForm extends ImmutablePureComponent {
     if (e.keyCode === 13 && (e.ctrlKey || e.metaKey)) {
       this.handleSubmit();
     }
+  }
+
+  handleButimili = () => {
+    if (this.props.text.endsWith(butimiliSuffix)) {
+      return ;
+    }
+    this.props.onChange(this.props.text + butimiliSuffix);
   }
 
   handleSubmit = () => {
@@ -212,6 +220,8 @@ export default class ComposeForm extends ImmutablePureComponent {
         </div>
 
         <div className='compose-form__publish'>
+          <div className='compose-form__publish-button-wrapper'><Button text='💩ﾌﾞﾁﾐる' onClick={this.handleButimili} disabled={disabledButton} block /></div>
+          &nbsp;
           <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={disabledButton} block /></div>
         </div>
       </div>
