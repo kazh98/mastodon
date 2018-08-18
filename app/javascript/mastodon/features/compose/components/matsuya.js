@@ -63,7 +63,7 @@ class Matsuya1 extends MatsuyaComponent {
     const header = (<strong>今日の松屋</strong>);
     const content = (<div className='matsuya__content'><strong>{item["name"]}</strong>{item["price"]}</div>);
     if ("url" in item) {
-      return (<Link to={item["url"]} className='matsuya__item'>{header}{content}</Link>);
+      return (<a href={item["url"]} target='_blank' className='matsuya__item'>{header}{content}</a>);
     } else {
       return (<div className='matsuya__item'>{header}{content}</div>);
     }
@@ -130,7 +130,7 @@ class Matsuya2 extends MatsuyaComponent {
     const header = (<strong>本日の松屋</strong>);
     const content = (<div className='matsuya__content'><strong>{item["name"]}</strong>{item["price"]}</div>);
     if ("url" in item) {
-      return (<Link to={item["url"]} className='matsuya__item'>{header}{content}</Link>);
+      return (<a href={item["url"]} target='_blank' className='matsuya__item'>{header}{content}</a>);
     } else {
       return (<div className='matsuya__item'>{header}{content}</div>);
     }
