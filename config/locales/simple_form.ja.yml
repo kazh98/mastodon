@@ -79,7 +79,7 @@ ja:
         must_be_following_dm: フォローしていないユーザーからのダイレクトメッセージをブロック
       notification_emails:
         digest: タイムラインからピックアップしてメールで通知する
-        favourite: お気に入りに登録された時にメールで通知する
+        favourite: わかるばぶに登録された時にメールで通知する
         follow: フォローされた時にメールで通知する
         follow_request: フォローリクエストを受けた時にメールで通知する
         mention: 返信が来た時にメールで通知する
