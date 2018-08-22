@@ -22,6 +22,8 @@ const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u20
 
 const butimiliButton = '💩ﾌﾞﾁﾐる'
 const butimiliSuffix = 'うおおおおおおおおおおおおあああああああああああああああああああああああああああああああ！！！！！！！！！！！ (ﾌﾞﾘﾌﾞﾘﾌﾞﾘﾌﾞﾘｭﾘｭﾘｭﾘｭﾘｭﾘｭ！！！！！！ﾌﾞﾂﾁﾁﾌﾞﾌﾞﾌﾞﾁﾁﾁﾁﾌﾞﾘﾘｲﾘﾌﾞﾌﾞﾌﾞﾌﾞｩｩｩｩｯｯｯ！！！！！！！)';
+const thatButton = 'あれ';
+const thatProbability = 0.5;
 
 const messages = defineMessages({
   placeholder: { id: 'compose_form.placeholder', defaultMessage: 'What is on your mind?' },
@@ -29,6 +31,33 @@ const messages = defineMessages({
   publish: { id: 'compose_form.publish', defaultMessage: 'Toot' },
   publishLoud: { id: 'compose_form.publish_loud', defaultMessage: '{publish}!' },
 });
+
+function simplyReplace(s_old, s_new, s, i)  {
+  let m;
+  if ((m = s_old.indexOf(s[i])) >= 0) {
+    if (Math.random() < thatProbability) {
+      s[i] = s_new[m];
+    }
+    return true;
+  }
+  if ((m = s_new.indexOf(s[i])) >= 0) {
+    if (Math.random() < thatProbability) {
+      s[i] = s_old[m];
+    }
+    return true;
+  }
+  return false;
+}
+
+function startsWith(pattern, s, i) {
+  pattern = Array.from(pattern);
+  for (let j = 0; j < pattern.length; ++j) {
+    if (pattern[j] !== s[i + j]) {
+      return false;
+    }
+  }
+  return true;
+}
 
 @injectIntl
 export default class ComposeForm extends ImmutablePureComponent {
@@ -77,6 +106,44 @@ export default class ComposeForm extends ImmutablePureComponent {
       return ;
     }
     this.props.onChange(this.props.text + butimiliSuffix);
+  }
+
+  handleThat = () => {
+    const s = Array.from(this.props.text);
+
+    for (let i = 0; i < s.length; ++i) {
+      if (s[i] === '#') {
+        continue ;
+      }
+      if (s[i] === '@') {
+        while (i + 1 < s.length && /^[a-zA-Z.]$/.test(s[i + 1])) ++i;
+        continue ;
+      }
+      if (startsWith("http://", s, i)) {
+        i += 6;
+        while (i + 1 < s.length && /^[a-zA-Z0-9_./:%#$&?()~=+-]$/.test(s[i + 1])) ++i;
+        continue ;
+      }
+      if (startsWith("https://", s, i)) {
+        i += 7;
+        while (i + 1 < s.length && /^[a-zA-Z0-9_./:%#$&?()~=+-]$/.test(s[i + 1])) ++i;
+        continue ;
+      }
+      if (simplyReplace("0123456789", "０１２３４５６７８９", s, i)) {
+        continue ;
+      }
+      if (simplyReplace("abcdefghijklmnopqrstuvwxyz", "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", s, i)) {
+        continue ;
+      }
+      if (simplyReplace("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ", s, i)) {
+        continue ;
+      }
+      if (simplyReplace(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~", "　！”＃＄％＆’（）＊＋，−．／：；＜＝＞？＠［￥］＾＿｀｛｜｝〜", s, i)) {
+        continue ;
+      }
+    }
+
+    this.props.onChange(s.join(''));
   }
 
   handleSubmit = () => {
@@ -222,7 +289,9 @@ export default class ComposeForm extends ImmutablePureComponent {
         </div>
 
         <div className='compose-form__publish'>
-          <div className='compose-form__publish-button-wrapper'><Button text={butimiliButton} onClick={this.handleButimili} disabled={disabledButton} block /></div>
+          <div className='compose-form__publish-button-wrapper'><Button text={butimiliButton} onClick={this.handleButimili} block /></div>
+          &nbsp;
+          <div className='compose-form__publish-button-wrapper'><Button text={thatButton} onClick={this.handleThat} block /></div>
           &nbsp;
           <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={disabledButton} block /></div>
         </div>
