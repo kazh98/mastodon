@@ -6,6 +6,7 @@ class MatsuyaComponent extends React.PureComponent {
   constructor() {
     super();
     this.rendering_state = this.getToday();
+    this.setPolling();
   }
 
   componentWillUnmount() {
@@ -25,7 +26,7 @@ class MatsuyaComponent extends React.PureComponent {
 
   refresh = () => {
     this.timer = null;
-    const now = getToday();
+    const now = this.getToday();
     if (now > this.rendering_state) {
       this.rendering_state = now;
       this.forceUpdate();
