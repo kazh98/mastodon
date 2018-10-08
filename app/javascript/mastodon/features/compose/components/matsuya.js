@@ -51,11 +51,6 @@ const defaultMatsuyaJSON = [
     "url": "https://www.matsuyafoods.co.jp/menu/curry/cry_ori_hb_170307.html"
   },
   {
-    "name": "ごろごろチキンのトマトカレー",
-    "price": "並: 590円, 大: 690円",
-    "url": "https://www.matsuyafoods.co.jp/menu/curry/cry_gorotomato.html"
-  },
-  {
     "name": "牛焼肉定食",
     "price": "600円 (W定食: 900円)",
     "url": "https://www.matsuyafoods.co.jp/menu/teishoku/tei_gyuuyaki_180403_hp.html"
@@ -74,11 +69,6 @@ const defaultMatsuyaJSON = [
     "name": "豚バラ生姜焼定食",
     "price": "590円 (W定食: 890円)",
     "url": "https://www.matsuyafoods.co.jp/menu/teishoku/tei_shouga_hp.html"
-  },
-  {
-    "name": "ケイジャンチキン定食",
-    "price": "650円 (W定食: 950円)",
-    "url": "https://www.matsuyafoods.co.jp/menu/teishoku/tei_cajun_hp.html"
   },
   {
     "name": "ぶっかけ担々うどん",
