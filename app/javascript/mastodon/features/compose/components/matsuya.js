@@ -31,11 +31,6 @@ const defaultMatsuyaJSON = [
     "url": "https://www.matsuyafoods.co.jp/menu/don/don_negishiobuta.html"
   },
   {
-    "name": "塩キャベツ豚丼",
-    "price": "並: 550円, 大: 610円",
-    "url": "https://www.matsuyafoods.co.jp/menu/don/don_shio_kyabetsu_hp.html"
-  },
-  {
     "name": "オリジナルカレー",
     "price": "並: 380円, 大: 480円",
     "url": "https://www.matsuyafoods.co.jp/menu/curry/cri_ori_170307.html"
