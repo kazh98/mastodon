@@ -33,7 +33,7 @@ module Mastodon
     end
 
     def repository
-      'tootsuite/mastodon'
+      'kazh98/social.arnip.org'
     end
 
     def source_base_url
